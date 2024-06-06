@@ -18,6 +18,10 @@ const ShipmentSchema = new mongoose.Schema({
     address: {
         type: String,
         required: true
+    },
+    billingAddress: {
+        type: String,
+        required: true
     }
 }, {
     collection: "Shipments",

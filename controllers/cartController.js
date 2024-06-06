@@ -26,12 +26,26 @@ module.exports = {
             res.status(500).json({ message: err.message });
         }
     },
-    getCart: async (req, res) => {
+    updateCartStatus: async (req, res) => {
         try {
             const { id: userId } = req.user;
             const cart = await Cart.findOne({ userId, status: 'active' });
             if (!cart) {
                 return res.status(404).json({ message: 'Cart not found' });
+            }
+
+            await Cart.updateOne({ _id: cart._id }, { $set: { status: 'inactive' } });
+            res.status(200).json({ message: 'Cart status updated successfully' });
+        } catch (err) {
+            res.status(500).json({ message: err.message });
+        }
+    },
+    getCart: async (req, res) => {
+        try {
+            const { id: userId } = req.user;
+            const cart = await Cart.findOne({ userId, status: 'active' });
+            if (!cart) {
+                return res.status(200).json([]);
             }
 
             const cartDetails = await CartDetail
