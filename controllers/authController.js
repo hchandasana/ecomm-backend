@@ -26,7 +26,7 @@ module.exports = {
 
             const token = jwt(user);
 
-            res.json({ token });
+            res.status(200).json({ token });
         } catch (err) {
             next(err);
         }
@@ -49,7 +49,7 @@ module.exports = {
 
             const token = jwt(user);
 
-            res.json({ token });
+            res.status(200).json({ token });
         } catch (err) {
             next(err);
         }
